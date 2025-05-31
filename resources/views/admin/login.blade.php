@@ -44,17 +44,26 @@
             </div>
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
-                <form action="../index3.html" method="post">
+                @if (Session::has('error_message'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Error:</strong>{{ Session::get('error_message') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        </button>
+                    </div>
+                @endif
+                <form action="{{ route('admin.login.request') }}" method="post">@csrf
                     <div class="input-group mb-1">
                         <div class="form-floating">
-                            <input id="loginEmail" type="email" class="form-control" value="" placeholder="" />
+                            <input id="loginEmail" type="email" name="email" class="form-control" value=""
+                                placeholder="Email" />
                             <label for="loginEmail">Email</label>
                         </div>
                         <div class="input-group-text"><span class="bi bi-envelope"></span></div>
                     </div>
                     <div class="input-group mb-1">
                         <div class="form-floating">
-                            <input id="loginPassword" type="password" class="form-control" placeholder="" />
+                            <input id="loginPassword" type="password" name="password" class="form-control"
+                                placeholder="Password" />
                             <label for="loginPassword">Password</label>
                         </div>
                         <div class="input-group-text"><span class="bi bi-lock-fill"></span></div>
@@ -93,28 +102,28 @@
             integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
         </script>
         <!--end::Required Plugin(Bootstrap 5)--><!--begin::Required Plugin(AdminLTE)-->
-        <script src="{{ asset('admin/js/adminlte.js">') }}</script>
-            <!--end::Required Plugin(AdminLTE)--><!--begin::OverlayScrollbars Configure-->
-            <script>
-              const SELECTOR_SIDEBAR_WRAPPER = '.sidebar-wrapper';
-              const Default = {
-                scrollbarTheme: 'os-theme-light',
-                scrollbarAutoHide: 'leave',
-                scrollbarClickScroll: true,
-              };
-              document.addEventListener('DOMContentLoaded', function () {
-                const sidebarWrapper = document.querySelector(SELECTOR_SIDEBAR_WRAPPER);
-                if (sidebarWrapper && typeof OverlayScrollbarsGlobal?.OverlayScrollbars !== 'undefined') {
-                  OverlayScrollbarsGlobal.OverlayScrollbars(sidebarWrapper, {
-                    scrollbars: {
-                      theme: Default.scrollbarTheme,
-                      autoHide: Default.scrollbarAutoHide,
-                      clickScroll: Default.scrollbarClickScroll,
-                    },
-                  });
-                }
-              });
-            </script>
+        <script src="{{ asset('admin/js/adminlte.js') }}"></script>
+                    <!--end::Required Plugin(AdminLTE)--><!--begin::OverlayScrollbars Configure-->
+                    <script>
+                      const SELECTOR_SIDEBAR_WRAPPER = '.sidebar-wrapper';
+                      const Default = {
+                        scrollbarTheme: 'os-theme-light',
+                        scrollbarAutoHide: 'leave',
+                        scrollbarClickScroll: true,
+                      };
+                      document.addEventListener('DOMContentLoaded', function () {
+                        const sidebarWrapper = document.querySelector(SELECTOR_SIDEBAR_WRAPPER);
+                        if (sidebarWrapper && typeof OverlayScrollbarsGlobal?.OverlayScrollbars !== 'undefined') {
+                          OverlayScrollbarsGlobal.OverlayScrollbars(sidebarWrapper, {
+                            scrollbars: {
+                              theme: Default.scrollbarTheme,
+                              autoHide: Default.scrollbarAutoHide,
+                              clickScroll: Default.scrollbarClickScroll,
+                            },
+                          });
+                        }
+                      });
+                    </script>
         <!--end::OverlayScrollbars Configure-->
         <!--end::Script-->
 </body>
