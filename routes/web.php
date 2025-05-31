@@ -3,14 +3,17 @@
 use App\Http\Controllers\Admin\AdminController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Admin Routes
+Route::prefix('admin')->name('admin.')->group(function () {
 
-Route::prefix('admin')->group(function () {
-    // Login route for admin
-    Route::get('/login', [AdminController::class, 'create'])->name('admin.login');
-    // Dashboard route for admin
-    Route::resource('/dashboard', AdminController::class)->only(['index']);
+    // Admin Login
+    Route::get('/login', [AdminController::class, 'create'])->name('login');
+
+    Route::middleware('admin')->group(function () {
+
+        // Dashboard route for admin
+        Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
+
+    });
 
 });
