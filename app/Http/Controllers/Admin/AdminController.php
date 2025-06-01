@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\LoginRequest;
 use App\Models\Admin;
 use App\Services\Admin\AdminService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller
 {
@@ -15,6 +16,8 @@ class AdminController extends Controller
      */
     public function index()
     {
+        Session::put('page', 'dashboard');
+
         return view('admin.dashboard');
     }
 
@@ -54,7 +57,9 @@ class AdminController extends Controller
      */
     public function edit(Admin $admin)
     {
-        //
+        Session::put('page', 'update_password');
+
+        return view('admin.update_password');
     }
 
     /**
@@ -71,6 +76,7 @@ class AdminController extends Controller
     public function destroy(Admin $admin)
     {
         auth()->guard('admin')->logout();
+
         return redirect()->route('admin.login');
     }
 }
