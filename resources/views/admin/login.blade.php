@@ -51,6 +51,14 @@
                         </button>
                     </div>
                 @endif
+                @foreach ($errors->all() as $error)
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Error:</strong> {{ $error }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        </button>
+
+                    </div>
+                @endforeach
                 <form action="{{ route('admin.login.request') }}" method="post">@csrf
                     <div class="input-group mb-1">
                         <div class="form-floating">
@@ -103,27 +111,27 @@
         </script>
         <!--end::Required Plugin(Bootstrap 5)--><!--begin::Required Plugin(AdminLTE)-->
         <script src="{{ asset('admin/js/adminlte.js') }}"></script>
-                    <!--end::Required Plugin(AdminLTE)--><!--begin::OverlayScrollbars Configure-->
-                    <script>
-                      const SELECTOR_SIDEBAR_WRAPPER = '.sidebar-wrapper';
-                      const Default = {
-                        scrollbarTheme: 'os-theme-light',
-                        scrollbarAutoHide: 'leave',
-                        scrollbarClickScroll: true,
-                      };
-                      document.addEventListener('DOMContentLoaded', function () {
-                        const sidebarWrapper = document.querySelector(SELECTOR_SIDEBAR_WRAPPER);
-                        if (sidebarWrapper && typeof OverlayScrollbarsGlobal?.OverlayScrollbars !== 'undefined') {
-                          OverlayScrollbarsGlobal.OverlayScrollbars(sidebarWrapper, {
-                            scrollbars: {
-                              theme: Default.scrollbarTheme,
-                              autoHide: Default.scrollbarAutoHide,
-                              clickScroll: Default.scrollbarClickScroll,
-                            },
-                          });
-                        }
-                      });
-                    </script>
+        <!--end::Required Plugin(AdminLTE)--><!--begin::OverlayScrollbars Configure-->
+        <script>
+            const SELECTOR_SIDEBAR_WRAPPER = '.sidebar-wrapper';
+            const Default = {
+                scrollbarTheme: 'os-theme-light',
+                scrollbarAutoHide: 'leave',
+                scrollbarClickScroll: true,
+            };
+            document.addEventListener('DOMContentLoaded', function() {
+                const sidebarWrapper = document.querySelector(SELECTOR_SIDEBAR_WRAPPER);
+                if (sidebarWrapper && typeof OverlayScrollbarsGlobal?.OverlayScrollbars !== 'undefined') {
+                    OverlayScrollbarsGlobal.OverlayScrollbars(sidebarWrapper, {
+                        scrollbars: {
+                            theme: Default.scrollbarTheme,
+                            autoHide: Default.scrollbarAutoHide,
+                            clickScroll: Default.scrollbarClickScroll,
+                        },
+                    });
+                }
+            });
+        </script>
         <!--end::OverlayScrollbars Configure-->
         <!--end::Script-->
 </body>
