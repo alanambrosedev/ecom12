@@ -157,7 +157,8 @@
                                     <!-- Message. Default to the start -->
                                     <div class="direct-chat-msg">
                                         <div class="direct-chat-infos clearfix">
-                                            <span class="direct-chat-name float-start">  {{ Auth::guard('admin')->user()->name }} </span>
+                                            <span class="direct-chat-name float-start">
+                                                {{ auth()->guard('admin')->user()->name }} </span>
                                             <span class="direct-chat-timestamp float-end"> 23 Jan 2:00 pm </span>
                                         </div>
                                         <!-- /.direct-chat-infos -->
@@ -187,7 +188,8 @@
                                     <!-- Message. Default to the start -->
                                     <div class="direct-chat-msg">
                                         <div class="direct-chat-infos clearfix">
-                                            <span class="direct-chat-name float-start">  {{ Auth::guard('admin')->user()->name }} </span>
+                                            <span class="direct-chat-name float-start">
+                                                {{ auth()->guard('admin')->user()->name }} </span>
                                             <span class="direct-chat-timestamp float-end"> 23 Jan 5:37 pm </span>
                                         </div>
                                         <!-- /.direct-chat-infos -->
@@ -222,7 +224,8 @@
                                         <li>
                                             <a href="#">
                                                 <img class="contacts-list-img"
-                                                    src="{{ asset('admin/images/user1-128x128.jpg') }}" alt="User Avatar" />
+                                                    src="{{ asset('admin/images/user1-128x128.jpg') }}"
+                                                    alt="User Avatar" />
                                                 <div class="contacts-list-info">
                                                     <span class="contacts-list-name">
                                                         Count Dracula
@@ -239,7 +242,8 @@
                                         <li>
                                             <a href="#">
                                                 <img class="contacts-list-img"
-                                                    src="{{ asset('admin/images/user7-128x128.jpg') }}" alt="User Avatar" />
+                                                    src="{{ asset('admin/images/user7-128x128.jpg') }}"
+                                                    alt="User Avatar" />
                                                 <div class="contacts-list-info">
                                                     <span class="contacts-list-name">
                                                         Sarah Doe
@@ -256,7 +260,8 @@
                                         <li>
                                             <a href="#">
                                                 <img class="contacts-list-img"
-                                                    src="{{ asset('admin/images/user3-128x128.jpg') }}" alt="User Avatar" />
+                                                    src="{{ asset('admin/images/user3-128x128.jpg') }}"
+                                                    alt="User Avatar" />
                                                 <div class="contacts-list-info">
                                                     <span class="contacts-list-name">
                                                         Nadia Jolie
@@ -273,7 +278,8 @@
                                         <li>
                                             <a href="#">
                                                 <img class="contacts-list-img"
-                                                    src="{{ asset('admin/images/user5-128x128.jpg') }}" alt="User Avatar" />
+                                                    src="{{ asset('admin/images/user5-128x128.jpg') }}"
+                                                    alt="User Avatar" />
                                                 <div class="contacts-list-info">
                                                     <span class="contacts-list-name">
                                                         Nora S. Vans
@@ -289,7 +295,8 @@
                                         <li>
                                             <a href="#">
                                                 <img class="contacts-list-img"
-                                                    src="{{ asset('admin/images/user6-128x128.jpg') }}" alt="User Avatar" />
+                                                    src="{{ asset('admin/images/user6-128x128.jpg') }}"
+                                                    alt="User Avatar" />
                                                 <div class="contacts-list-info">
                                                     <span class="contacts-list-name">
                                                         John K.
@@ -306,7 +313,8 @@
                                         <li>
                                             <a href="#">
                                                 <img class="contacts-list-img"
-                                                    src="{{ asset('admin/images/user8-128x128.jpg') }}" alt="User Avatar" />
+                                                    src="{{ asset('admin/images/user8-128x128.jpg') }}"
+                                                    alt="User Avatar" />
                                                 <div class="contacts-list-info">
                                                     <span class="contacts-list-name">
                                                         Kenneth M.

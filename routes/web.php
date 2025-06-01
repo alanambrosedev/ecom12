@@ -15,7 +15,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Dashboard route for admin
         Route::get('dashboard', [AdminController::class, 'index'])->name('dashboard');
         // Admin Logout
-        Route::get('logout', [AdminController::class, 'destroy'])->name('admin.logout');
+        Route::get('logout', [AdminController::class, 'destroy'])->name('logout');
 
     });
 

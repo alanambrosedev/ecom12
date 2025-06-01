@@ -133,7 +133,7 @@
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                     <img src="{{ asset('admin/images/user2-160x160.jpg') }}" class="user-image rounded-circle shadow"
                         alt="User Image" />
-                    <span class="d-none d-md-inline"> {{ Auth::guard('admin')->user()->name }}</span>
+                    <span class="d-none d-md-inline"> {{ auth()->guard('admin')->user()->name }}</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
                     <!--begin::User Image-->
@@ -141,8 +141,9 @@
                         <img src="{{ asset('admin/images/user2-160x160.jpg') }}" class="rounded-circle shadow"
                             alt="User Image" />
                         <p>
-                            {{ Auth::guard('admin')->user()->name }}
-                            <small>Member since {{ Auth::guard('admin')->user()->created_at }}3</small>
+                            {{ auth()->guard('admin')->user()->name }}
+                            <small>Member since {{ auth()->guard('admin')->user()->created_at->format('F j, Y') }}
+                            </small>
                         </p>
                     </li>
                     <!--end::User Image-->

@@ -4,7 +4,6 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class Admin
@@ -16,7 +15,7 @@ class Admin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (! Auth::guard('admin')->check()) {
+        if (! auth()->guard('admin')->check()) {
             // Redirect to the login page if the user is not authenticated
             return redirect()->route('admin.login');
         }
