@@ -34,7 +34,6 @@ class AdminController extends Controller
         $data = $request->validated();
         $service = new AdminService;
         $loginStatus = $service->login($data);
-        
         if ($loginStatus == 1) {
             return redirect()->route('admin.dashboard');
         } else {
@@ -72,7 +71,6 @@ class AdminController extends Controller
     public function destroy(Admin $admin)
     {
         auth()->guard('admin')->logout();
-
         return redirect()->route('admin.login');
     }
 }
