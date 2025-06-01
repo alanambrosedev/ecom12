@@ -34,6 +34,7 @@ class AdminController extends Controller
         $data = $request->validated();
         $service = new AdminService;
         $loginStatus = $service->login($data);
+        
         if ($loginStatus == 1) {
             return redirect()->route('admin.dashboard');
         } else {
