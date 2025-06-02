@@ -59,22 +59,25 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label class="form-label">Current Password</label>
-                                        <input type="password" name="current_password" class="form-control" required>
-                                    </div>
+                                        <label for="current_password" class="form-label">Current Password</label>
+                                        <input type="password" class="form-control" id="current_password"
+                                            name="current_password">
+                                        <span id="verifyPwd"></span>
 
-                                    <div class="mb-3">
-                                        <label class="form-label">New Password</label>
-                                        <input type="password" name="new_password" class="form-control" required>
-                                    </div>
 
-                                    <div class="mb-3">
-                                        <label class="form-label">Confirm Password</label>
-                                        <input type="password" name="new_password_confirmation" class="form-control"
-                                            required>
-                                    </div>
 
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                        <div class="mb-3">
+                                            <label class="form-label">New Password</label>
+                                            <input type="password" name="new_password" class="form-control" required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label">Confirm Password</label>
+                                            <input type="password" name="new_password_confirmation" class="form-control"
+                                                required>
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary">Submit</button>
                                 </form>
                             </div>
                         </div>

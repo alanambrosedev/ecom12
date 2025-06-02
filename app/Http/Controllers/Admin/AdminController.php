@@ -11,6 +11,13 @@ use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller
 {
+    protected $adminService;
+
+    public function __construct(AdminService $adminService)
+    {
+        $this->adminService = $adminService;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -35,12 +42,11 @@ class AdminController extends Controller
     public function store(LoginRequest $request)
     {
         $data = $request->validated();
-        $service = new AdminService;
-        $loginStatus = $service->login($data);
+        $loginStatus = $this->adminService->login($data);
         if ($loginStatus == 1) {
             return redirect()->route('admin.dashboard');
         } else {
-            return redirect()->back()->with('error_message', 'Invalid Email or Password');
+            return redirect()->back()->with('error_message', 'Invalid Email or Password. Please try again.');
         }
     }
 
@@ -78,5 +84,12 @@ class AdminController extends Controller
         auth()->guard('admin')->logout();
 
         return redirect()->route('admin.login');
+    }
+
+    public function verifyPassword(Request $request)
+    {
+        $data = $request->all();
+
+        return $this->adminService->verifyPassword($data);
     }
 }
