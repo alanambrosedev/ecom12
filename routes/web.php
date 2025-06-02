@@ -16,8 +16,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('dashboard', [AdminController::class, 'index'])->name('dashboard');
         // Admin Password Update
         Route::get('update-password', [AdminController::class, 'edit'])->name('update_password');
+        Route::post('update-password', [AdminController::class, 'updatePassword'])->name('update_password.request');
         // Admin Password Update Request
         Route::post('verify-password', [AdminController::class, 'verifyPassword'])->name('verify-password');
+
         // Admin Logout
         Route::get('logout', [AdminController::class, 'destroy'])->name('logout');
     });

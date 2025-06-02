@@ -2,6 +2,7 @@
 
 namespace App\Services\Admin;
 
+use App\Models\Admin;
 use Illuminate\Support\Facades\Hash;
 
 class AdminService
@@ -32,5 +33,28 @@ class AdminService
         } else {
             return 'false';
         }
+    }
+
+    public function updatePassword($data)
+    {
+        if (Hash::check($data['current_password'], auth()->guard('admin')->user()->password)) {
+            if ($data['new_password'] == $data['confirm_password']) {
+                Admin::where('email', auth()->guard('admin')->user()->email)->update(['password' => bcrypt($data['new_password'])]);
+                $status = 'success';
+                $message = 'Password updated successfully.';
+
+            } else {
+                $status = 'error';
+                $message = 'New password and confirm password do not match.';
+            }
+        } else {
+            $status = 'error';
+            $message = 'Current password is incorrect.';
+        }
+
+        return [
+            'status' => $status,
+            'message' => $message,
+        ];
     }
 }

@@ -48,7 +48,7 @@
                                     </div>
                                 @endif
 
-                                <form method="POST" action="{{ route('admin.update_password') }}">
+                                <form method="POST" action="{{ route('admin.update_password.request') }}">
                                     @csrf
 
                                     <div class="mb-3">
@@ -68,13 +68,12 @@
 
                                         <div class="mb-3">
                                             <label class="form-label">New Password</label>
-                                            <input type="password" name="new_password" class="form-control" required>
+                                            <input type="password" name="new_password" class="form-control">
                                         </div>
 
                                         <div class="mb-3">
                                             <label class="form-label">Confirm Password</label>
-                                            <input type="password" name="new_password_confirmation" class="form-control"
-                                                required>
+                                            <input type="password" name="confirm_password" class="form-control">
                                         </div>
 
                                         <button type="submit" class="btn btn-primary">Submit</button>
