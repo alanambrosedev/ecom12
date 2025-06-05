@@ -105,4 +105,11 @@ class AdminController extends Controller
             return redirect()->back()->with('error_message', $response['message']);
         }
     }
+
+    public function editDetails()
+    {
+        Session::put('page', 'update-details');
+
+        return view('admin.update_details');
+    }
 }
