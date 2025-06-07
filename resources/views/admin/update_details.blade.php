@@ -48,7 +48,8 @@
                                     </div>
                                 @endif
 
-                                <form method="POST" action="{{ route('admin.update-details') }}">
+                                <form method="POST" action="{{ route('admin.update-details') }}"
+                                    enctype="multipart/form-data">
                                     @csrf
 
                                     <div class="mb-3">
@@ -62,6 +63,36 @@
                                         <input type="text" class="form-control" name="name"
                                             value="{{ auth()->guard('admin')->user()->name }}">
                                     </div>
+                                    <div class="mb-3">
+                                        <label for="image" class="form-label">Profile Image</label>
+
+                                        <!-- File input for new image -->
+                                        <input type="file" class="form-control" id="image" name="image"
+                                            accept="image/*">
+
+                                        <!-- Existing image display and controls -->
+                                        @if (!empty(Auth::guard('admin')->user()->image))
+                                            <div id="profileImageBlock" class="mt-2">
+                                                <a target="_blank"
+                                                    href="{{ url('admin/images/photos/' . Auth::guard('admin')->user()->image) }}"
+                                                    class="btn btn-outline-primary btn-sm me-2">
+                                                    View Image
+                                                </a>
+
+                                                <!-- Hidden input to retain current image if new one is not uploaded -->
+                                                <input type="hidden" name="current_image"
+                                                    value="{{ Auth::guard('admin')->user()->image }}">
+
+                                                <!-- Delete link (can be handled via JavaScript) -->
+                                                <a href="javascript:void(0);" id="deleteProfileImage"
+                                                    data-admin-id="{{ Auth::guard('admin')->user()->id }}"
+                                                    class="btn btn-outline-danger btn-sm">
+                                                    Delete
+                                                </a>
+                                            </div>
+                                        @endif
+                                    </div>
+
 
                                     <div class="mb-3">
                                         <label class="form-label">Mobile</label>

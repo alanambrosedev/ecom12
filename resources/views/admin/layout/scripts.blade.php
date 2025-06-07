@@ -223,3 +223,4 @@
 
  <script src="{{ asset('admin/js/jquery-3.7.1.js') }}"></script>
  <script src="{{ asset('admin/js/custom.js') }}"></script>
+ <script src="{{ asset('admin/js/sweetalert2@11.js') }}"></script>

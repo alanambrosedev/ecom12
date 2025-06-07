@@ -24,6 +24,7 @@ class DetailRequest extends FormRequest
         return [
             'name' => 'required|regex:/^[\p{L} ]+$/u|max:255',
             'mobile' => 'required|numeric|digits:10',
+            'image' => 'image',
         ];
     }
 
@@ -36,6 +37,7 @@ class DetailRequest extends FormRequest
             'mobile.required' => 'Mobile number is required.',
             'mobile.numeric' => 'Mobile number must be numeric.',
             'mobile.digits' => 'Mobile number must be exactly 10 digits.',
+            'image.image' => 'Image must be a valid image file.',
         ];
     }
 }

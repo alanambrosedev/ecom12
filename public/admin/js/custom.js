@@ -29,3 +29,45 @@ $(document).ready(function () {
         });
     });
 });
+
+$(document).on('click', '#deleteProfileImage', function () {
+    const admin_id = $(this).data('admin-id');
+
+    Swal.fire({
+        title: "Are you sure?",
+        text: "Do you really want to delete your profile image?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "Cancel",
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: 'POST',
+                url: 'delete-admin-image',
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content'),
+                    admin_id: admin_id
+                },
+                success: function (resp) {
+                    if (resp.success) {
+                        $('#profileImageBlock').remove();
+                        Swal.fire("Deleted!", "Profile image deleted successfully.", "success")
+                        .then(() => {
+                            location.reload();
+                        });
+                    } else {
+                        Swal.fire("Error!", "Failed to delete profile image.", "error");
+                    }
+                },
+                error: function () {
+                    Swal.fire("Error!", "An error occured while deleting the image.", "error");
+
+                }
+            });
+        }
+    });
+});
+
