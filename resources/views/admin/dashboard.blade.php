@@ -1,4 +1,4 @@
-@extends('admin\layout\layout')
+@extends('admin.layout.layout')
 @section('content')
     <main class="app-main">
         <!--begin::App Content Header-->

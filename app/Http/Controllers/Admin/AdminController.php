@@ -135,4 +135,11 @@ class AdminController extends Controller
 
         return response()->json($status);
     }
+
+    public function getSubadmins()
+    {
+        Session::put('page', 'subadmins');
+        $subAdmins = $this->adminService->getSubadmins();
+        return view('admin.subadmins.subadmins')->with(compact('subAdmins'));
+    }
 }

@@ -13,14 +13,40 @@ class AdminTableSeeder extends Seeder
      */
     public function run(): void
     {
-        Admin::updateOrCreate(['email' => 'admin@ecom12.com'],
+        // Main Admin
+        Admin::updateOrCreate(
+            ['email' => 'admin@ecom12.com'],
             [
-                'name' => 'Admin',
+                'name' => 'Jonathan Blake',
                 'role' => 'admin',
-                'mobile' => '7012756684',
+                'mobile' => '9876543210',
                 'password' => Hash::make('admin2024'),
                 'status' => 1,
+            ]
+        );
 
-            ]);
+        // Sub Admin 1
+        Admin::updateOrCreate(
+            ['email' => 'subadmin1@ecom12.com'],
+            [
+                'name' => 'Sophia Lee',
+                'role' => 'subadmin',
+                'mobile' => '9811122233',
+                'password' => Hash::make('admin2024'),
+                'status' => 1,
+            ]
+        );
+
+        // Sub Admin 2
+        Admin::updateOrCreate(
+            ['email' => 'subadmin2@ecom12.com'],
+            [
+                'name' => 'David Chen',
+                'role' => 'subadmin',
+                'mobile' => '9822233344',
+                'password' => Hash::make('admin2024'),
+                'status' => 1,
+            ]
+        );
     }
 }

@@ -112,4 +112,11 @@ class AdminService
             'message' => 'Profile image not found or admin not found.',
         ];
     }
+
+    public function getSubadmins()
+    {
+        $subAdmins = Admin::where('role', 'subadmin')->get();
+
+        return $subAdmins;
+    }
 }
