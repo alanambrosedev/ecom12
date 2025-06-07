@@ -57,4 +57,13 @@ class AdminService
             'message' => $message,
         ];
     }
+
+    public function updateDetails($data)
+    {
+        Admin::where('email', auth()->guard('admin')->user()->email)
+            ->update([
+                'name' => $data['name'],
+                'mobile' => $data['mobile'],
+            ]);
+    }
 }
