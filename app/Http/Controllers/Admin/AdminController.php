@@ -125,7 +125,6 @@ class AdminController extends Controller
             $this->adminService->updateDetails($request->validated());
 
             return redirect()->back()->with('success', 'Admin details updated successfully.');
-
         }
     }
 
@@ -140,6 +139,29 @@ class AdminController extends Controller
     {
         Session::put('page', 'subadmins');
         $subAdmins = $this->adminService->getSubadmins();
+
         return view('admin.subadmins.subadmins')->with(compact('subAdmins'));
+    }
+
+    public function UpdateSubadminStatus(Request $request)
+    {
+        $result = $this->adminService->UpdateSubadminStatus($request->id);
+
+        if ($result['success']) {
+            return response()->json(['status' => $result['status'], 'message' => $result['message']]);
+        }
+
+        return response()->json(['message' => $result['message'], 400]);
+    }
+
+    public function deleteSubadmin(Request $request)
+    {
+        $result = $this->adminService->deleteSubadmin($request->id);
+
+        if ($result['success']) {
+            return response()->json(['success' => true, 'message' => $result['message']]);
+        } else {
+            return response()->json(['success' => false, 'message' => $result['message']]);
+        }
     }
 }

@@ -27,6 +27,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('delete-admin-image', [AdminController::class, 'deleteProfileImage']);
         // Get subadmins list
         Route::get('subadmins', [AdminController::class, 'getSubadmins']);
+        // Update subadmin Status
+        Route::post('update-subadmin-status', [AdminController::class, 'UpdateSubadminStatus']);
+        // Delete sub admin
+        Route::post('delete-subadmin', [AdminController::class, 'deleteSubadmin']);
         // Admin logout
         Route::get('logout', [AdminController::class, 'destroy'])->name('logout');
     });

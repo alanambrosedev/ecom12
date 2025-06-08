@@ -119,4 +119,51 @@ class AdminService
 
         return $subAdmins;
     }
+
+    public function UpdateSubadminStatus($subadminId)
+    {
+        $subAdmin = Admin::find($subadminId);
+
+        if ($subAdmin) {
+            $subAdmin->status = $subAdmin->status == 1 ? 0 : 1;
+            $subAdmin->save();
+
+            return [
+                'success' => true,
+                'status' => $subAdmin->status,
+                'message' => 'Subadmin status updated successfully.',
+            ];
+        } else {
+            return [
+                'success' => false,
+                'message' => 'Subadmin not found.',
+            ];
+        }
+    }
+
+    public function deleteSubadmin($id)
+    {
+        $subAdmin = Admin::find($id);
+
+        if (! $subAdmin) {
+            return [
+                'success' => false,
+                'message' => 'Subadmin not found.',
+            ];
+        }
+
+        if ($subAdmin->role != 'subadmin') {
+            return [
+                'success' => false,
+                'message' => 'Cannot delete this subadmin.',
+            ];
+        }
+
+        $subAdmin->delete();
+
+        return [
+            'success' => true,
+            'message' => 'Subadmin deleted successfully.',
+        ];
+    }
 }

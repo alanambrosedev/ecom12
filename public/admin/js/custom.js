@@ -55,9 +55,9 @@ $(document).on('click', '#deleteProfileImage', function () {
                     if (resp.success) {
                         $('#profileImageBlock').remove();
                         Swal.fire("Deleted!", "Profile image deleted successfully.", "success")
-                        .then(() => {
-                            location.reload();
-                        });
+                            .then(() => {
+                                location.reload();
+                            });
                     } else {
                         Swal.fire("Error!", "Failed to delete profile image.", "error");
                     }
@@ -71,3 +71,63 @@ $(document).on('click', '#deleteProfileImage', function () {
     });
 });
 
+$(document).on('click', '.updateSubadminStatus', function () {
+    var subadminId = $(this).data('id');
+    var $icon = $(this).find('i');
+
+    $.ajax({
+        url: 'update-subadmin-status',
+        method: 'POST',
+        data: {
+            _token: $('meta[name="csrf-token"]').attr('content'),
+            id: subadminId
+        },
+        success: function (response) {
+            if (response.status == 1) {
+                $icon.attr('class', 'fas fa-toggle-on text-success fa-lg');
+            } else {
+                $icon.attr('class', 'fas fa-toggle-off text-danger fa-lg');
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error("Error updating status:", error);
+        }
+    });
+});
+$(document).on('click', '.deleteSubadmin', function () {
+    let subadminId = $(this).data('id');
+
+    Swal.fire({
+        title: 'Are you sure?',
+        text: 'This will permanently delete the subadmin.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "Cancel",
+
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: 'delete-subadmin',
+                type: 'POST',
+                data: {
+                    _token: $('meta[name= "csrf-token"]').attr('content'),
+                    id: subadminId
+                },
+                success: function (response) {
+                    if (response.success) {
+                        Swal.fire('Deleted!', response.message, 'success').then(() => {
+                            $('#subamdin-row-' + subadminId).fadeOut();
+                            location.reload();
+                        });
+                    } else {
+                        Swal.fire('Error!', 'Server error occured.', 'error');
+                    }
+                }
+
+            });
+        }
+    });
+});
