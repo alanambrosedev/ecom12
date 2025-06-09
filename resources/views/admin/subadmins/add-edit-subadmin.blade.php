@@ -7,7 +7,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-6">
-                        <h3 class="mb-0">SubadminDetails Management</h3>
+                        <h3 class="mb-0">Subadmin Management</h3>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-end">
@@ -49,7 +49,7 @@
                                     </div>
                                 @endif
 
-                                <form method="POST" action="{{ url('admin/add-edit-subadminDetails/request') }}"
+                                <form method="POST" action="{{ url('admin/add-edit-subadmin/request') }}"
                                     enctype="multipart/form-data">
                                     @csrf
 
@@ -58,7 +58,7 @@
                                     <div class="mb-3">
                                         <label class="form-label">Name</label>
                                         <input type="text" class="form-control" name="name"
-                                            value="{{ old('name', $subadminDetails->name ?? '') }}">
+                                            value="{{ old('email', $subadminDetails->name ?? '') }}">
                                     </div>
 
                                     <div class="mb-3">
