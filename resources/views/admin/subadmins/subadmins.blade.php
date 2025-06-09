@@ -5,6 +5,10 @@
         <div class="card mb-4">
             <div class="card-header">
                 <h3 class="card-title">Subadmins</h3>
+                <a style="max-width: 150px; float:right; display: inline:block;" href="{{ url('admin/add-edit-subadmin') }}"
+                    class="btn btn-block btn-primary">
+                    Add Subadmin
+                </a>
             </div>
             <div class="card-body">
                 <table class="table table-bordered">
@@ -32,6 +36,11 @@
                                         @else
                                             <i class="fas fa-toggle-off text-danger fa-lg"></i>
                                         @endif
+                                    </a>
+
+                                    <a href="{{ url('admin/add-edit-subadmin/' . $subadmin->id) }}"
+                                        class="text-primary me-2 text-decoration-none" title="Edit Subadmin">
+                                        <i class="fas fa-edit fa-lg"></i>
                                     </a>
 
                                     <a href="javascript:void(0);" class="deleteSubadmin text-danger"

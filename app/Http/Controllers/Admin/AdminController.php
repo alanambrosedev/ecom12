@@ -164,4 +164,12 @@ class AdminController extends Controller
             return response()->json(['success' => false, 'message' => $result['message']]);
         }
     }
+
+    public function addEditSubadmin($id = null)
+    {
+        $title = $id ? 'Edit Subadmin' : 'Add Subadmin';
+        $subadminDetails = $id ? Admin::findorFail($id) : null;
+
+        return view('admin.subadmins.add-edit-subadmin', compact('title', 'subadminDetails'));
+    }
 }

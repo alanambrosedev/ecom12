@@ -31,6 +31,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('update-subadmin-status', [AdminController::class, 'UpdateSubadminStatus']);
         // Delete sub admin
         Route::post('delete-subadmin', [AdminController::class, 'deleteSubadmin']);
+        // Get add edit subadmin form
+        Route::get('add-edit-subadmin/{id?}', [AdminController::class, 'addEditSubadmin']);
         // Admin logout
         Route::get('logout', [AdminController::class, 'destroy'])->name('logout');
     });
