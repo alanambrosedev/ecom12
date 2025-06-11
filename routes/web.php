@@ -26,13 +26,15 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Admin avatar delete
         Route::post('delete-admin-image', [AdminController::class, 'deleteProfileImage']);
         // Get subadmins list
-        Route::get('subadmins', [AdminController::class, 'getSubadmins']);
+        Route::get('subadmins', [AdminController::class, 'getSubadmins'])->name('subadmins');
         // Update subadmin Status
         Route::post('update-subadmin-status', [AdminController::class, 'UpdateSubadminStatus']);
         // Delete sub admin
         Route::post('delete-subadmin', [AdminController::class, 'deleteSubadmin']);
         // Get add edit subadmin form
         Route::get('add-edit-subadmin/{id?}', [AdminController::class, 'addEditSubadmin']);
+        // Add or edit subadmin submission
+        Route::post('add-edit-subadmin/request', [AdminController::class, 'addEditSubadminSubmit']);
         // Admin logout
         Route::get('logout', [AdminController::class, 'destroy'])->name('logout');
     });

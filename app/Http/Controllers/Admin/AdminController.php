@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\DetailRequest;
 use App\Http\Requests\Admin\LoginRequest;
 use App\Http\Requests\Admin\PasswordRequest;
+use App\Http\Requests\Admin\SubadminRequest;
 use App\Models\Admin;
 use App\Services\Admin\AdminService;
 use Illuminate\Http\Request;
@@ -45,10 +46,11 @@ class AdminController extends Controller
     {
         $data = $request->validated();
         $loginStatus = $this->adminService->login($data);
-        if ($loginStatus == 1) {
+
+        if ($loginStatus['success']) {
             return redirect()->route('admin.dashboard');
         } else {
-            return redirect()->back()->with('error_message', 'Invalid Email or Password. Please try again.');
+            return redirect()->back()->with('error_message', $loginStatus['message']);
         }
     }
 
@@ -171,5 +173,16 @@ class AdminController extends Controller
         $subadminDetails = $id ? Admin::findorFail($id) : null;
 
         return view('admin.subadmins.add-edit-subadmin', compact('title', 'subadminDetails'));
+    }
+
+    public function addEditSubadminSubmit(SubadminRequest $request)
+    {
+        $data = $request->validated();
+
+        $this->adminService->addEditSubadmin($data);
+
+        $message = isset($data['id']) ? 'Subadmin updated successfully.' : 'Subadmin added successfully.';
+
+        return redirect()->route('admin.subadmins')->with('success', $message);
     }
 }

@@ -13,19 +13,33 @@ class AdminService
     public function login($data)
     {
         if (auth()->guard('admin')->attempt(['email' => $data['email'], 'password' => $data['password']])) {
+            $admin = auth()->guard('admin')->user();
+
+            if ($admin->status == 0) {
+                auth()->guard('admin')->logout(); // Logout immediately
+
+                return [
+                    'success' => false,
+                    'message' => 'Your account is inactive. Please contact administrator.',
+                ];
+            }
+
+            // Remember me functionality
             if (! empty($data['remember'])) {
                 setcookie('email', $data['email'], time() + 3600);
                 setcookie('password', $data['password'], time() + 3600);
             } else {
-                setcookie('email', '');
-                setcookie('password', '');
+                setcookie('email', '', time() - 3600);
+                setcookie('password', '', time() - 3600);
             }
-            $loginStatus = 1;
-        } else {
-            $loginStatus = 0;
+
+            return ['success' => true];
         }
 
-        return $loginStatus;
+        return [
+            'success' => false,
+            'message' => 'Invalid Email or Password. Please try again.',
+        ];
     }
 
     public function verifyPassword($data)
@@ -165,5 +179,43 @@ class AdminService
             'success' => true,
             'message' => 'Subadmin deleted successfully.',
         ];
+    }
+
+    public function addEditSubadmin($data)
+    {
+        $admin = isset($data['id']) ? Admin::find($data['id']) : new Admin;
+
+        $admin->name = $data['name'];
+        $admin->email = $data['email'];
+        $admin->mobile = $data['mobile'];
+
+        if (! empty($data['password'])) {
+            $admin->password = bcrypt($data['password']);
+        }
+
+        $imageName = '';
+
+        if (request()->hasFile('image')) {
+            $imageTmp = request()->file('image');
+
+            if ($imageTmp->isValid()) {
+                $manager = new ImageManager(new Driver);
+                $image = $manager->read($imageTmp);
+
+                $extension = $imageTmp->getClientOriginalExtension();
+                $imageName = rand(111, 99999).'.'.$extension;
+                $imagePath = public_path('admin/images/photos/'.$imageName);
+
+                $image->save($imagePath);
+                $admin->image = $imageName;
+
+            }
+        } elseif (! empty($data['current_image'])) {
+            $admin->image = $data['current_image'];
+        }
+
+        $admin->role = 'subadmin';
+        $admin->status = 1;
+        $admin->save();
     }
 }
