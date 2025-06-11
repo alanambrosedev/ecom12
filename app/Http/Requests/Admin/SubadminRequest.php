@@ -25,7 +25,6 @@ class SubadminRequest extends FormRequest
 
         return [
             'id' => 'nullable|exists:admins,id',
-
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:admins,email,'.$id,
             'mobile' => 'required|digits:10|unique:admins,mobile,'.$id,

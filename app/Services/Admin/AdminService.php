@@ -208,7 +208,6 @@ class AdminService
 
                 $image->save($imagePath);
                 $admin->image = $imageName;
-
             }
         } elseif (! empty($data['current_image'])) {
             $admin->image = $data['current_image'];
