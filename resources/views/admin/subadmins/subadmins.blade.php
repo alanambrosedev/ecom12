@@ -42,6 +42,10 @@
                                         class="text-primary me-2 text-decoration-none" title="Edit Subadmin">
                                         <i class="fas fa-edit fa-lg"></i>
                                     </a>
+                                    <a href="{{ url('admin/update-role/' . $subadmin->id) }}"
+                                        class="text-warning text-decoration-none me-2" title="Set Permissions">
+                                        <i class="fas fa-unlock me-1"></i>
+                                    </a>
 
                                     <a href="javascript:void(0);" class="deleteSubadmin text-danger"
                                         data-id="{{ $subadmin->id }}" title="Delete Subadmin">

@@ -35,6 +35,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('add-edit-subadmin/{id?}', [AdminController::class, 'addEditSubadmin']);
         // Add or edit subadmin submission
         Route::post('add-edit-subadmin/request', [AdminController::class, 'addEditSubadminSubmit']);
+        // Set Subadmin permissions
+        Route::get('update-role/{id}', [AdminController::class, 'updateRole'])->name('update.role');
+        Route::post('update-role/{id}', [AdminController::class, 'updateRoleRequest'])->name('update.role.submit');
         // Admin logout
         Route::get('logout', [AdminController::class, 'destroy'])->name('logout');
     });

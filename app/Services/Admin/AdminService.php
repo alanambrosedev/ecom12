@@ -3,6 +3,7 @@
 namespace App\Services\Admin;
 
 use App\Models\Admin;
+use App\Models\AdminRole;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Intervention\Image\Drivers\Gd\Driver;
@@ -216,5 +217,19 @@ class AdminService
         $admin->role = 'subadmin';
         $admin->status = 1;
         $admin->save();
+    }
+
+    public function UpdateSubadminRoles($id, $modules)
+    {
+        foreach ($modules as $module => $permissions) {
+            AdminRole::updateOrCreate(
+                ['subadmin_id' => $id, 'module' => $module],
+                [
+                    'view_access' => ! empty($permissions['view_access']),
+                    'edit_access' => ! empty($permissions['edit_access']),
+                    'full_access' => ! empty($permissions['full_access']),
+                ]
+            );
+        }
     }
 }

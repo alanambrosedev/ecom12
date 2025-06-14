@@ -8,6 +8,7 @@ use App\Http\Requests\Admin\LoginRequest;
 use App\Http\Requests\Admin\PasswordRequest;
 use App\Http\Requests\Admin\SubadminRequest;
 use App\Models\Admin;
+use App\Models\AdminRole;
 use App\Services\Admin\AdminService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -184,5 +185,25 @@ class AdminController extends Controller
         $message = isset($data['id']) ? 'Subadmin updated successfully.' : 'Subadmin added successfully.';
 
         return redirect()->route('admin.subadmins')->with('success', $message);
+    }
+
+    public function updateRole($id)
+    {
+        $admin = Admin::findOrFail($id);
+
+        $modules = ['Categories', 'Products', 'Orders', 'Users', 'Subscribers'];
+
+        $adminRoles = AdminRole::where('subadmin_id', $id)->get()->keyBy('module');
+
+        return view('admin.subadmins.update_roles', compact('admin', 'modules', 'adminRoles'));
+    }
+
+    public function updateRoleRequest(Request $request, $id)
+    {
+        $modules = $request->input('modules', []);
+
+        $this->adminService->UpdateSubadminRoles($id, $modules);
+
+        return redirect()->back()->with('success', 'Subadmin roles updated successfully.');
     }
 }
